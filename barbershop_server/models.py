@@ -11,8 +11,6 @@ class Master(models.Model):
     rating = models.IntegerField(db_column='rating')
     photo = models.CharField(max_length=255, db_column='photo')
 
-    def __str__(self):
-        return self.name
 
 
 class Service(models.Model):
@@ -45,7 +43,7 @@ class User(models.Model):
     class Meta:
         db_table = 'users'
 
-    id = models.IntegerField(db_column='id', primary_key=True)
+    id = models.AutoField(db_column='id', primary_key=True)
 
 
 class Session(models.Model):
