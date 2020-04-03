@@ -11,6 +11,8 @@ class Master(models.Model):
     rating = models.IntegerField(db_column='rating')
     photo = models.CharField(max_length=255, db_column='photo')
 
+    def __str__(self):
+        return self.name
 
 
 class Service(models.Model):
@@ -50,3 +52,4 @@ class Session(models.Model):
     id = models.AutoField(primary_key=True)
     time = models.DateTimeField()
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
+

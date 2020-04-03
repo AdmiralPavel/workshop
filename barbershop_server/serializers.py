@@ -13,15 +13,19 @@ class SessionSerializer(serializers.ModelSerializer):
 
 
 class MasterSerializer(serializers.ModelSerializer):
+    sessions = SessionSerializer(source='session_set', many=True)
+
     class Meta:
         model = Master
-        fields = ('name', 'description', 'id', 'rating', 'photo',)
+        fields = ('name', 'description', 'id', 'rating', 'photo', 'sessions')
 
     def create(self, validated_data):
         return Master.objects.create(**validated_data)
 
 
 class ServiceSerializer(serializers.ModelSerializer):
+    masters = serializers.ListSerializer(child=MasterSerializer())
+
     class Meta:
         model = Service
         fields = ('name', 'description', 'id', 'price', 'photo', 'masters',)
